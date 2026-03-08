@@ -15,9 +15,17 @@ const { title = 'zenpass — terminal password manager' } = Astro.props;
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
 
   <style>
+
+  
+    @font-face {
+      font-family: 'Departure Mono';
+      src: url('/fonts/DepartureMono-Regular.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
     :root {
       --amber: #FFB432;
       --amber-dim: #C47A00;
@@ -34,7 +42,7 @@ const { title = 'zenpass — terminal password manager' } = Astro.props;
     html {
       background: var(--bg);
       color: var(--fg);
-      font-family: 'DM Mono', monospace;
+      font-family: 'Departure Mono', monospace;
       -webkit-font-smoothing: antialiased;
     }
 

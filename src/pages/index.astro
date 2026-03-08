@@ -1,0 +1,325 @@
+---
+import Base from '../layouts/Base.astro';
+import Terminal from '../components/Terminal.astro';
+---
+<Base>
+
+  <!-- NAV -->
+  <nav id="nav" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 opacity-0">
+    <span class="text-amber font-mono text-sm font-medium tracking-widest">zp</span>
+    <div class="flex items-center gap-8">
+      <a href="#features" class="text-[var(--dim)] hover:text-[var(--fg)] text-xs tracking-widest transition-colors duration-200">features</a>
+      <a href="#security" class="text-[var(--dim)] hover:text-[var(--fg)] text-xs tracking-widest transition-colors duration-200">security</a>
+      <a href="#install" class="text-[var(--dim)] hover:text-[var(--fg)] text-xs tracking-widest transition-colors duration-200">install</a>
+      <a href="https://github.com" class="border border-[var(--border)] hover:border-[var(--amber)] text-[var(--fg)] hover:text-[var(--amber)] text-xs tracking-widest px-4 py-2 transition-all duration-200">
+        github ↗
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-section relative min-h-screen flex items-center overflow-hidden px-8">
+
+    <!-- Ambient glow -->
+    <div class="pointer-events-none absolute inset-0 overflow-hidden">
+      <div class="glow-orb absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+                  w-[600px] h-[400px] rounded-full opacity-0"
+           style="background: radial-gradient(ellipse, rgba(255,180,50,0.06) 0%, transparent 70%);">
+      </div>
+    </div>
+
+    <!-- Grid lines -->
+    <div class="pointer-events-none absolute inset-0"
+         style="background-image: linear-gradient(rgba(255,180,50,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,180,50,0.02) 1px, transparent 1px); background-size: 60px 60px;">
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-32">
+
+      <!-- Left: copy -->
+      <div class="hero-copy">
+        <div class="eyebrow opacity-0 mb-6 flex items-center gap-3">
+          <span class="inline-block w-8 h-px bg-[var(--amber)]"></span>
+          <span class="text-[var(--amber)] text-xs tracking-[0.25em] uppercase font-medium">v0.1.0 — written in rust</span>
+        </div>
+
+        <h1 class="hero-title opacity-0 font-display leading-[1.05] mb-8">
+          <span class="block text-[clamp(3rem,7vw,5.5rem)] font-bold tracking-tight text-[var(--fg)]"
+                style="font-family: 'Syne', sans-serif;">
+            zenpass
+          </span>
+          <span class="block text-[clamp(1rem,2.5vw,1.4rem)] text-[var(--dim)] font-mono font-normal mt-2 leading-relaxed">
+            A password manager that lives<br/>where you do — the terminal.
+          </span>
+        </h1>
+
+        <p class="hero-desc opacity-0 text-[var(--dim)] font-mono text-sm leading-loose mb-10 max-w-md">
+          AES-256-GCM encrypted entries. Argon2id key derivation.
+          Everything stored locally in <span class="text-[var(--fg)]">~/.vault.toml</span>.
+          No cloud. No telemetry. No trust required.
+        </p>
+
+        <div class="hero-cta opacity-0 flex flex-wrap items-center gap-4">
+          <a href="#install"
+             class="group flex items-center gap-2 bg-[var(--amber)] text-[var(--bg)] px-6 py-3 text-sm font-medium tracking-widest hover:bg-[var(--amber-dim)] transition-colors duration-200">
+            install
+            <span class="group-hover:translate-x-1 transition-transform duration-200">→</span>
+          </a>
+          <a href="https://github.com"
+             class="flex items-center gap-2 border border-[var(--border)] text-[var(--dim)] hover:text-[var(--fg)] hover:border-[var(--dim)] px-6 py-3 text-sm tracking-widest transition-all duration-200">
+            view source ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: terminal -->
+      <div class="terminal-wrap opacity-0 flex justify-center lg:justify-end">
+        <Terminal />
+      </div>
+
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-hint opacity-0 absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+      <span class="text-[var(--dim)] text-xs tracking-widest">scroll</span>
+      <div class="w-px h-8 bg-gradient-to-b from-[var(--dim)] to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="py-32 px-8 border-t border-[var(--border)]">
+    <div class="max-w-7xl mx-auto">
+      <div class="section-header mb-20 opacity-0">
+        <span class="text-[var(--amber)] text-xs tracking-[0.25em] uppercase">features</span>
+        <h2 class="text-[var(--fg)] text-3xl font-bold mt-3" style="font-family: 'Syne', sans-serif;">
+          Everything you need.<br/>Nothing you don't.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border)]">
+        {[
+          {
+            icon: '⬡',
+            title: 'AES-256-GCM',
+            desc: 'Industry-standard authenticated encryption. Each entry uses a unique random nonce — no two ciphertexts are alike.',
+          },
+          {
+            icon: '◈',
+            title: 'Argon2id KDF',
+            desc: 'Your master password is never stored. It derives a 32-byte key via Argon2id, memory-hard and resistant to brute force.',
+          },
+          {
+            icon: '◎',
+            title: 'Local-first',
+            desc: 'Everything lives in ~/.vault.toml on your machine. No accounts, no servers, no subscription.',
+          },
+          {
+            icon: '▣',
+            title: 'Ratatui TUI',
+            desc: 'A polished terminal UI with keyboard navigation, password reveal, add/delete entries, and a confirmation flow.',
+          },
+          {
+            icon: '◇',
+            title: 'Zero telemetry',
+            desc: 'The binary never makes a network request. It cannot — by design. Read the source and verify.',
+          },
+          {
+            icon: '△',
+            title: 'Written in Rust',
+            desc: 'Memory-safe, fast, and a single statically-linked binary. No runtime, no GC, no surprises.',
+          },
+        ].map((f, i) => (
+          <div class={`feature-card opacity-0 bg-[var(--surface)] p-8 hover:bg-[#1a1916] transition-colors duration-300`}
+               style={`transition-delay: ${i * 60}ms`}>
+            <div class="text-[var(--amber)] text-2xl mb-5 font-mono">{f.icon}</div>
+            <h3 class="text-[var(--fg)] text-sm font-medium tracking-widest mb-3 uppercase">{f.title}</h3>
+            <p class="text-[var(--dim)] text-sm leading-loose">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY -->
+  <section id="security" class="py-32 px-8 border-t border-[var(--border)]">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+
+      <div class="security-copy opacity-0">
+        <span class="text-[var(--amber)] text-xs tracking-[0.25em] uppercase">security model</span>
+        <h2 class="text-[var(--fg)] text-3xl font-bold mt-3 mb-8" style="font-family: 'Syne', sans-serif;">
+          Your key never<br/>touches disk.
+        </h2>
+        <div class="space-y-6 text-[var(--dim)] text-sm leading-loose font-mono">
+          <p>When you unlock the vault, your master password is run through Argon2id to produce a 32-byte AES key. That key lives only in memory for the duration of your session.</p>
+          <p>Each vault entry is encrypted individually with AES-256-GCM and a random 96-bit nonce. The on-disk format stores only <span class="text-[var(--fg)]">ciphertext + nonce</span> — never plaintext.</p>
+          <p>If someone steals your <span class="text-[var(--fg)]">~/.vault.toml</span>, all they get is encrypted blobs. Without your master password, they're useless.</p>
+        </div>
+      </div>
+
+      <!-- Diagram -->
+      <div class="security-diagram opacity-0 font-mono text-sm">
+        <div class="border border-[var(--border)] p-6 space-y-4">
+          <div class="text-[var(--dim)] text-xs tracking-widest uppercase mb-6">encryption flow</div>
+
+          <div class="flow-step flex items-center gap-4">
+            <div class="w-32 shrink-0 border border-[var(--amber)] text-[var(--amber)] text-center py-2 px-3 text-xs">
+              master pw
+            </div>
+            <div class="text-[var(--dim)]">+</div>
+            <div class="w-24 shrink-0 border border-[var(--border)] text-[var(--dim)] text-center py-2 px-3 text-xs">
+              kdf_salt
+            </div>
+          </div>
+
+          <div class="pl-14 text-[var(--dim)]">↓ <span class="text-[var(--fg)]">Argon2id</span></div>
+
+          <div class="flow-step flex items-center gap-4">
+            <div class="w-32 shrink-0 border border-[var(--fg)] text-[var(--fg)] text-center py-2 px-3 text-xs">
+              32-byte key
+            </div>
+            <div class="text-xs text-[var(--dim)] italic">(memory only)</div>
+          </div>
+
+          <div class="pl-14 text-[var(--dim)]">↓ <span class="text-[var(--fg)]">AES-256-GCM</span> + nonce</div>
+
+          <div class="flow-step flex items-center gap-4">
+            <div class="flex-1 border border-[var(--border)] text-[var(--dim)] text-center py-2 px-3 text-xs">
+              nonce:ciphertext → .vault.toml
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-[var(--border)] text-xs text-[var(--dim)] leading-loose">
+            ✓ authenticated encryption — tamper-evident<br />
+            ✓ unique nonce per entry — no pattern leakage<br />
+            ✓ key never serialized or written to disk
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALL -->
+  <section id="install" class="py-32 px-8 border-t border-[var(--border)]">
+    <div class="max-w-3xl mx-auto">
+      <div class="install-header opacity-0 mb-16">
+        <span class="text-[var(--amber)] text-xs tracking-[0.25em] uppercase">get started</span>
+        <h2 class="text-[var(--fg)] text-3xl font-bold mt-3" style="font-family: 'Syne', sans-serif;">
+          Install in seconds.
+        </h2>
+      </div>
+
+      <div class="space-y-6">
+        {[
+          { label: '01 — clone', code: 'git clone https://github.com/you/zenpass' },
+          { label: '02 — build', code: 'cargo build --release' },
+          { label: '03 — run',   code: './target/release/zenpass' },
+        ].map((step, i) => (
+          <div class={`install-step opacity-0`} style={`transition-delay: ${i * 100}ms`}>
+            <div class="text-[var(--dim)] text-xs tracking-widest mb-2 uppercase">{step.label}</div>
+            <div class="group relative border border-[var(--border)] hover:border-[var(--amber)] transition-colors duration-200 bg-[var(--surface)]">
+              <pre class="px-6 py-4 text-[var(--fg)] text-sm overflow-x-auto"><code>{step.code}</code></pre>
+              <button
+                class="copy-btn absolute right-4 top-1/2 -translate-y-1/2 text-[var(--dim)] hover:text-[var(--amber)] text-xs tracking-widest transition-colors duration-200 opacity-0 group-hover:opacity-100"
+                data-code={step.code}>
+                copy
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="install-note opacity-0 mt-12 border-l-2 border-[var(--amber)] pl-6">
+        <p class="text-[var(--dim)] text-sm leading-loose font-mono">
+          Requires <span class="text-[var(--fg)]">Rust 1.75+</span>.
+          On first run, zenpass will create a new user profile.
+          Your vault is stored at <span class="text-[var(--fg)]">~/.vault.toml</span>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-[var(--border)] px-8 py-10">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span class="text-[var(--amber)] font-mono text-sm tracking-widest">zenpass</span>
+      <span class="text-[var(--dim)] font-mono text-xs">
+        MIT license · built with Rust · zero cloud
+      </span>
+      <a href="https://github.com" class="text-[var(--dim)] hover:text-[var(--fg)] text-xs tracking-widest transition-colors duration-200">
+        github ↗
+      </a>
+    </div>
+  </footer>
+
+</Base>
+
+<style>
+  .text-amber { color: var(--amber); }
+
+  .hero-section {
+    background:
+      radial-gradient(ellipse 80% 50% at 60% 50%, rgba(255,180,50,0.03) 0%, transparent 60%),
+      var(--bg);
+  }
+</style>
+
+<script>
+  import { animate, inView, stagger } from 'motion';
+
+  // NAV fade in
+  animate('#nav', { opacity: 1 }, { duration: 0.6, delay: 0.2 });
+
+  // HERO sequence
+  animate('.glow-orb', { opacity: 1 }, { duration: 2, delay: 0.3 });
+
+  animate('.eyebrow', { opacity: [0, 1], x: [-10, 0] }, { duration: 0.6, delay: 0.4 });
+  animate('.hero-title', { opacity: [0, 1], y: [20, 0] }, { duration: 0.7, delay: 0.6 });
+  animate('.hero-desc', { opacity: [0, 1], y: [15, 0] }, { duration: 0.6, delay: 0.85 });
+  animate('.hero-cta', { opacity: [0, 1], y: [10, 0] }, { duration: 0.6, delay: 1.05 });
+  animate('.terminal-wrap', { opacity: [0, 1], y: [30, 0] }, { duration: 0.8, delay: 0.7 });
+  animate('.scroll-hint', { opacity: [0, 0.5] }, { duration: 1, delay: 1.8 });
+
+  // SCROLL-triggered sections
+  inView('.section-header', ({ target }) => {
+    animate(target, { opacity: [0, 1], y: [20, 0] }, { duration: 0.6 });
+  }, { margin: '-10% 0px' });
+
+  inView('.feature-card', ({ target }) => {
+    animate(target, { opacity: [0, 1], y: [20, 0] }, { duration: 0.5 });
+  }, { margin: '-5% 0px' });
+
+  inView('.security-copy', ({ target }) => {
+    animate(target, { opacity: [0, 1], x: [-20, 0] }, { duration: 0.7 });
+  }, { margin: '-10% 0px' });
+
+  inView('.security-diagram', ({ target }) => {
+    animate(target, { opacity: [0, 1], x: [20, 0] }, { duration: 0.7 });
+  }, { margin: '-10% 0px' });
+
+  inView('.install-header', ({ target }) => {
+    animate(target, { opacity: [0, 1], y: [15, 0] }, { duration: 0.6 });
+  }, { margin: '-10% 0px' });
+
+  inView('.install-step', ({ target }) => {
+    animate(target, { opacity: [0, 1], y: [15, 0] }, { duration: 0.5 });
+  }, { margin: '-5% 0px' });
+
+  inView('.install-note', ({ target }) => {
+    animate(target, { opacity: [0, 1] }, { duration: 0.6 });
+  }, { margin: '-5% 0px' });
+
+  // Copy buttons
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const code = btn.getAttribute('data-code') ?? '';
+      await navigator.clipboard.writeText(code);
+      const original = btn.textContent;
+      btn.textContent = 'copied!';
+      setTimeout(() => { btn.textContent = original; }, 1500);
+    });
+  });
+
+  // Flow steps animate in sequence when in view
+  inView('.flow-step', ({ target }) => {
+    animate(target, { opacity: [0, 1], x: [-10, 0] }, { duration: 0.4 });
+  }, { margin: '-5% 0px' });
+</script>

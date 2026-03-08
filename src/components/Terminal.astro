@@ -1,0 +1,203 @@
+---
+---
+<div class="terminal-window" id="terminal">
+  <div class="terminal-bar">
+    <span class="dot dot-red"></span>
+    <span class="dot dot-yellow"></span>
+    <span class="dot dot-green"></span>
+    <span class="terminal-title">zenpass</span>
+  </div>
+  <div class="terminal-body" id="terminal-body">
+    <div class="terminal-line" id="tl-prompt-1">
+      <span class="prompt">❯</span>
+      <span class="cmd" id="cmd-1"></span>
+      <span class="cursor" id="cursor-1">█</span>
+    </div>
+    <div class="terminal-line hidden" id="tl-output-1">
+      <span class="output-label amber">🔐  VAULT</span>
+    </div>
+    <div class="terminal-line hidden" id="tl-login">
+      <span class="dim">──────────────────────────</span>
+    </div>
+    <div class="terminal-line hidden" id="tl-user-label">
+      <span class="dim"> Username </span>
+    </div>
+    <div class="terminal-line hidden" id="tl-user-val">
+      <span class="field-box">zen</span>
+    </div>
+    <div class="terminal-line hidden" id="tl-pass-label">
+      <span class="dim"> Master Password </span>
+    </div>
+    <div class="terminal-line hidden" id="tl-pass-val">
+      <span class="field-box">••••••••••••</span>
+    </div>
+    <div class="terminal-line hidden" id="tl-sep2">
+      <span class="dim">──────────────────────────</span>
+    </div>
+    <div class="terminal-line hidden" id="tl-vault-header">
+      <span class="amber">Sites</span>
+      <span class="dim ml-8">Details</span>
+    </div>
+    <div class="terminal-line hidden" id="tl-entry-1">
+      <span class="amber">▶ github.com</span>
+      <span class="dim ml-4">alice / ••••••••</span>
+    </div>
+    <div class="terminal-line hidden" id="tl-entry-2">
+      <span class="dim">  google.com</span>
+    </div>
+    <div class="terminal-line hidden" id="tl-entry-3">
+      <span class="dim">  aws.amazon.com</span>
+    </div>
+    <div class="terminal-line hidden" id="tl-footer">
+      <span class="dim text-xs">↑↓ navigate · S show/hide · A add · D delete</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .terminal-window {
+    background: #0e0d0b;
+    border: 1px solid #2A2720;
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    box-shadow:
+      0 0 0 1px #1a1814,
+      0 40px 80px rgba(0,0,0,0.6),
+      0 0 60px rgba(255,180,50,0.04);
+    max-width: 480px;
+    width: 100%;
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: #131210;
+    border-bottom: 1px solid #2A2720;
+  }
+
+  .dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+  }
+  .dot-red    { background: #FF5F57; }
+  .dot-yellow { background: #FEBC2E; }
+  .dot-green  { background: #28C840; }
+
+  .terminal-title {
+    margin-left: auto;
+    margin-right: auto;
+    color: #6E6A60;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+
+  .terminal-body {
+    padding: 20px 24px 24px;
+    min-height: 280px;
+    line-height: 1.8;
+  }
+
+  .terminal-line {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    min-height: 1.8em;
+  }
+
+  .terminal-line.hidden { display: none; }
+
+  .prompt { color: #FFB432; }
+  .cmd    { color: #DCD7CD; }
+  .cursor { color: #FFB432; animation: blink 1s step-end infinite; }
+  .amber  { color: #FFB432; }
+  .dim    { color: #6E6A60; }
+  .ml-8   { margin-left: 2rem; }
+  .ml-4   { margin-left: 1rem; }
+  .text-xs { font-size: 11px; }
+
+  .output-label { font-weight: 500; letter-spacing: 0.15em; }
+
+  .field-box {
+    color: #DCD7CD;
+    border: 1px solid #2A2720;
+    border-radius: 4px;
+    padding: 1px 8px;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+</style>
+
+<script>
+  async function sleep(ms: number) {
+    return new Promise(r => setTimeout(r, ms));
+  }
+
+  async function typeText(el: HTMLElement, text: string, speed = 55) {
+    for (const ch of text) {
+      el.textContent += ch;
+      await sleep(speed + Math.random() * 30);
+    }
+  }
+
+  async function show(id: string, delay = 0) {
+    await sleep(delay);
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('hidden');
+  }
+
+  async function runTerminalAnimation() {
+    const cmd1 = document.getElementById('cmd-1') as HTMLElement;
+    const cursor1 = document.getElementById('cursor-1') as HTMLElement;
+
+    await sleep(600);
+    await typeText(cmd1, 'zenpass', 80);
+    await sleep(300);
+    cursor1.style.display = 'none';
+
+    await show('tl-output-1', 100);
+    await show('tl-login', 80);
+    await show('tl-user-label', 80);
+    await show('tl-user-val', 80);
+    await show('tl-pass-label', 80);
+    await show('tl-pass-val', 80);
+    await show('tl-sep2', 80);
+    await sleep(600);
+    await show('tl-vault-header', 100);
+    await show('tl-entry-1', 120);
+    await show('tl-entry-2', 120);
+    await show('tl-entry-3', 120);
+    await show('tl-footer', 200);
+  }
+
+  // Restart animation on loop
+  async function loop() {
+    while (true) {
+      await runTerminalAnimation();
+      await sleep(4000);
+
+      // Reset
+      const cmd1 = document.getElementById('cmd-1') as HTMLElement;
+      const cursor1 = document.getElementById('cursor-1') as HTMLElement;
+      if (cmd1) cmd1.textContent = '';
+      if (cursor1) cursor1.style.display = '';
+
+      const ids = ['tl-output-1','tl-login','tl-user-label','tl-user-val',
+                   'tl-pass-label','tl-pass-val','tl-sep2','tl-vault-header',
+                   'tl-entry-1','tl-entry-2','tl-entry-3','tl-footer'];
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('hidden');
+      }
+      await sleep(400);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loop);
+</script>

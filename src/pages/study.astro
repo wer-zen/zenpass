@@ -1,4 +1,3 @@
-
 ---
 // Piano Studio Chimica — 7 Giorni
 ---
@@ -19,7 +18,6 @@
       color: #fff;
       margin: 0;
       padding: 0;
-      zoom: 150%
     }
 
     /* Scanline overlay */
@@ -99,6 +97,17 @@
       to   { opacity: 1; }
     }
     header { animation: fadeIn 0.5s ease both; }
+
+    /* Responsive zoom: 150% at 2560px, scales down proportionally */
+    :root { zoom: 1; }
+
+    @media (min-width: 2560px) { :root { zoom: 1.5; } }
+    @media (max-width: 2559px) and (min-width: 1920px) { :root { zoom: 1.125; } }
+    @media (max-width: 1919px) and (min-width: 1440px) { :root { zoom: 1.0; } }
+    @media (max-width: 1439px) and (min-width: 1024px) { :root { zoom: 0.9; } }
+    @media (max-width: 1023px) and (min-width: 768px)  { :root { zoom: 0.8; } }
+    @media (max-width: 767px)  and (min-width: 480px)  { :root { zoom: 0.7; } }
+    @media (max-width: 479px)                          { :root { zoom: 0.6; } }
   </style>
 </head>
 <body class="min-h-screen bg-black px-5 py-14 md:px-12 lg:px-24">

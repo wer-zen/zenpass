@@ -3,359 +3,596 @@
 ---
 
 <html lang="it">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Piano Studio Chimica — 7 Giorni</title>
-  <style>
-    * {
-      font-family: 'Departure Mono', monospace;
-      box-sizing: border-box;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Piano Studio Chimica — 7 Giorni</title>
+    <style>
+      * {
+        font-family: "Departure Mono", monospace;
+        box-sizing: border-box;
+      }
 
-    html, body {
-      background: #000;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
+      html,
+      body {
+        background: #000;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+      }
 
-    /* Scanline overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(255,255,255,0.012) 2px,
-        rgba(255,255,255,0.012) 4px
-      );
-      pointer-events: none;
-      z-index: 999;
-    }
+      /* Scanline overlay */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(255, 255, 255, 0.012) 2px,
+          rgba(255, 255, 255, 0.012) 4px
+        );
+        pointer-events: none;
+        z-index: 999;
+      }
 
-    .day-card {
-      border: 1px solid #1e1e1e;
-      transition: border-color 0.2s ease, background 0.2s ease;
-    }
-    .day-card:hover {
-      border-color: #333;
-      background: rgba(255,255,255,0.015);
-    }
+      .day-card {
+        border: 1px solid #1e1e1e;
+        transition:
+          border-color 0.2s ease,
+          background 0.2s ease;
+      }
+      .day-card:hover {
+        border-color: #333;
+        background: rgba(255, 255, 255, 0.015);
+      }
 
-    .badge {
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      padding: 2px 8px;
-      border: 1px solid currentColor;
-      white-space: nowrap;
-    }
+      .badge {
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        padding: 2px 8px;
+        border: 1px solid currentColor;
+        white-space: nowrap;
+      }
 
-    .tip-box {
-      border-left: 2px solid #252525;
-      color: #4a4a4a;
-      font-size: 11px;
-      line-height: 1.7;
-    }
+      .tip-box {
+        border-left: 2px solid #252525;
+        color: #4a4a4a;
+        font-size: 11px;
+        line-height: 1.7;
+      }
 
-    .section-head {
-      font-size: 9px;
-      letter-spacing: 0.2em;
-      color: #333;
-    }
+      .section-head {
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        color: #333;
+      }
 
-    .topic-text {
-      font-size: 12px;
-      color: #777;
-      line-height: 1.6;
-    }
+      .topic-text {
+        font-size: 12px;
+        color: #777;
+        line-height: 1.6;
+      }
 
-    .day-title {
-      font-size: 13px;
-      color: #ccc;
-      letter-spacing: 0.02em;
-    }
+      .day-title {
+        font-size: 13px;
+        color: #ccc;
+        letter-spacing: 0.02em;
+      }
 
-    /* Fade-in stagger */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .day-card { animation: fadeUp 0.45s ease both; }
-    .day-card:nth-child(1) { animation-delay: 0.05s; }
-    .day-card:nth-child(2) { animation-delay: 0.1s; }
-    .day-card:nth-child(3) { animation-delay: 0.15s; }
-    .day-card:nth-child(4) { animation-delay: 0.2s; }
-    .day-card:nth-child(5) { animation-delay: 0.25s; }
-    .day-card:nth-child(6) { animation-delay: 0.3s; }
-    .day-card:nth-child(7) { animation-delay: 0.35s; }
+      /* Fade-in stagger */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .day-card {
+        animation: fadeUp 0.45s ease both;
+      }
+      .day-card:nth-child(1) {
+        animation-delay: 0.05s;
+      }
+      .day-card:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      .day-card:nth-child(3) {
+        animation-delay: 0.15s;
+      }
+      .day-card:nth-child(4) {
+        animation-delay: 0.2s;
+      }
+      .day-card:nth-child(5) {
+        animation-delay: 0.25s;
+      }
+      .day-card:nth-child(6) {
+        animation-delay: 0.3s;
+      }
+      .day-card:nth-child(7) {
+        animation-delay: 0.35s;
+      }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-    header { animation: fadeIn 0.5s ease both; }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      header {
+        animation: fadeIn 0.5s ease both;
+      }
 
-    /* Responsive zoom: 150% at 2560px, scales down proportionally */
-    :root { zoom: 1; }
+      /* Responsive zoom: 150% at 2560px, scales down proportionally */
+      :root,
+      body,
+      html {
+        zoom: 1;
+      }
 
-    @media (min-width: 2560px) { :root { zoom: 1.5; } }
-    @media (max-width: 2559px) and (min-width: 1920px) { :root { zoom: 1.125; } }
-    @media (max-width: 1919px) and (min-width: 1440px) { :root { zoom: 1.0; } }
-    @media (max-width: 1439px) and (min-width: 1024px) { :root { zoom: 0.9; } }
-    @media (max-width: 1023px) and (min-width: 768px)  { :root { zoom: 0.8; } }
-    @media (max-width: 767px)  and (min-width: 480px)  { :root { zoom: 0.7; } }
-    @media (max-width: 479px)                          { :root { zoom: 0.6; } }
-  </style>
-</head>
-<body class="min-h-screen bg-black px-5 py-14 md:px-12 lg:px-24">
+      @media (min-width: 2560px) {
+        :root,
+        body,
+        html {
+          zoom: 1.5;
+        }
+      }
+      @media (max-width: 2559px) and (min-width: 1920px) {
+        :root,
+        body,
+        html {
+          zoom: 150%;
+        }
+      }
+      @media (max-width: 1919px) and (min-width: 1440px) {
+        :root,
+        body,
+        html {
+          zoom: 150%;
+        }
+      }
+      @media (max-width: 1439px) and (min-width: 1024px) {
+        :root,
+        body,
+        html {
+          zoom: 0.9;
+        }
+      }
+      @media (max-width: 1023px) and (min-width: 768px) {
+        :root,
+        body,
+        html {
+          zoom: 0.8;
+        }
+      }
+      @media (max-width: 767px) and (min-width: 480px) {
+        :root,
+        body,
+        html {
+          zoom: 0.7;
+        }
+      }
+      @media (max-width: 479px) {
+        :root,
+        body,
+        html {
+          zoom: 0.6;
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-black px-5 py-14 md:px-12 lg:px-24">
+    <!-- Header -->
+    <header class="mb-12 max-w-3xl mx-auto">
+      <p class="text-[10px] tracking-[0.18em] text-neutral-800 mb-3">
+        [ PIANO DI STUDIO ]
+      </p>
+      <h1
+        class="text-3xl md:text-4xl text-white tracking-tight leading-none mb-2"
+      >
+        CHIMICA<br />
+        <span class="text-neutral-600">— 7 GIORNI</span>
+      </h1>
+      <p class="text-[10px] text-neutral-800 tracking-[0.2em] mt-4">
+        SAB 21 → VEN 27 &nbsp;·&nbsp; OLIMPIADI / GARE
+      </p>
+      <div class="mt-7 border-t border-neutral-900"></div>
+    </header>
 
-  <!-- Header -->
-  <header class="mb-12 max-w-3xl mx-auto">
-    <p class="text-[10px] tracking-[0.18em] text-neutral-800 mb-3">[ PIANO DI STUDIO ]</p>
-    <h1 class="text-3xl md:text-4xl text-white tracking-tight leading-none mb-2">
-      CHIMICA<br/>
-      <span class="text-neutral-600">— 7 GIORNI</span>
-    </h1>
-    <p class="text-[10px] text-neutral-800 tracking-[0.2em] mt-4">SAB 21 → VEN 27 &nbsp;·&nbsp; OLIMPIADI / GARE</p>
-    <div class="mt-7 border-t border-neutral-900"></div>
-  </header>
+    <!-- Cards -->
+    <main class="max-w-3xl mx-auto space-y-2">
+      <!-- Day 1 — Atomo -->
+      <div class="day-card p-5 rounded-none">
+        <div class="flex items-start gap-3 mb-4 flex-wrap">
+          <span class="badge" style="color:#4a90d9;">SAB 21</span>
+          <span class="day-title">Atomo, struttura e tavola periodica</span>
+          <span class="text-[10px] text-neutral-800 tracking-widest ml-auto"
+            >~4–5h</span
+          >
+        </div>
+        <p class="section-head mb-2">// MATTINA</p>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#378ADD;"></span>
+          <span class="topic-text"
+            >Modelli atomici (Thomson, Rutherford, Bohr), isotopi, nucleo</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#378ADD;"></span>
+          <span class="topic-text"
+            >Atomo quantistico: orbitali, numeri quantici, configurazione
+            elettronica</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-4">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#378ADD;"></span>
+          <span class="topic-text"
+            >Principio di Pauli, regola di Hund, livelli energetici</span
+          >
+        </div>
+        <p class="section-head mb-2">// POMERIGGIO</p>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#1D9E75;"></span>
+          <span class="topic-text"
+            >Tavola periodica: gruppi, periodi, blocchi, simboli di Lewis</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-4">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#1D9E75;"></span>
+          <span class="topic-text"
+            >Proprietà periodiche: raggio atomico, energia ionizzazione,
+            affinità elettronica, elettronegatività</span
+          >
+        </div>
+        <div class="tip-box pl-3 py-1">
+          Esercitati a scrivere la configurazione elettronica degli elementi dei
+          primi 4 periodi a memoria.
+        </div>
+      </div>
 
-  <!-- Cards -->
-  <main class="max-w-3xl mx-auto space-y-2">
+      <!-- Day 2 — Legami -->
+      <div class="day-card p-5 rounded-none">
+        <div class="flex items-start gap-3 mb-4 flex-wrap">
+          <span class="badge" style="color:#c9862a;">DOM 22</span>
+          <span class="day-title">Legami chimici e forma delle molecole</span>
+          <span class="text-[10px] text-neutral-800 tracking-widest ml-auto"
+            >~4–5h</span
+          >
+        </div>
+        <p class="section-head mb-2">// MATTINA</p>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#BA7517;"></span>
+          <span class="topic-text"
+            >Legame ionico, covalente (puro/polare), metallico — strutture di
+            Lewis</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-4">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#BA7517;"></span>
+          <span class="topic-text"
+            >Solidi ionici, metallici, reticolari (diamante, grafite, quarzo)</span
+          >
+        </div>
+        <p class="section-head mb-2">// POMERIGGIO</p>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#BA7517;"></span>
+          <span class="topic-text"
+            >Teoria VSEPR → geometria molecolare (lineare, piana, tetraedrica,
+            ecc.)</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#BA7517;"></span>
+          <span class="topic-text"
+            >Momento dipolare, molecole polari/apolari</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-4">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#BA7517;"></span>
+          <span class="topic-text"
+            >Forze intermolecolari: London, dipolo-dipolo, legame a idrogeno</span
+          >
+        </div>
+        <div class="tip-box pl-3 py-1">
+          Allena la VSEPR con H₂O, NH₃, CO₂, CH₄, SF₆, PCl₅ — spesso escono agli
+          esami.
+        </div>
+      </div>
 
-    <!-- Day 1 — Atomo -->
-    <div class="day-card p-5 rounded-none">
-      <div class="flex items-start gap-3 mb-4 flex-wrap">
-        <span class="badge" style="color:#4a90d9;">SAB 21</span>
-        <span class="day-title">Atomo, struttura e tavola periodica</span>
-        <span class="text-[10px] text-neutral-800 tracking-widest ml-auto">~4–5h</span>
+      <!-- Day 3 — Moli -->
+      <div class="day-card p-5 rounded-none">
+        <div class="flex items-start gap-3 mb-4 flex-wrap">
+          <span class="badge" style="color:#c44a72;">LUN 23</span>
+          <span class="day-title">Moli, stechiometria e gas</span>
+          <span class="text-[10px] text-neutral-800 tracking-widest ml-auto"
+            >~4–5h</span
+          >
+        </div>
+        <p class="section-head mb-2">// MATTINA</p>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#D4537E;"></span>
+          <span class="topic-text"
+            >Mole, costante di Avogadro, massa molare, volume molare</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#D4537E;"></span>
+          <span class="topic-text"
+            >Formula minima e molecolare, composizione percentuale</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-4">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#D4537E;"></span>
+          <span class="topic-text"
+            >Calcoli stechiometrici, reagente limitante, resa di reazione</span
+          >
+        </div>
+        <p class="section-head mb-2">// POMERIGGIO</p>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#D4537E;"></span>
+          <span class="topic-text"
+            >Leggi dei gas: Boyle, Charles, Gay-Lussac, principio Avogadro</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-4">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#D4537E;"></span>
+          <span class="topic-text"
+            >Equazione di stato dei gas ideali PV = nRT</span
+          >
+        </div>
+        <div class="tip-box pl-3 py-1">
+          Risolvi almeno 10 esercizi numerici sulla stechiometria — è la sezione
+          con più calcoli alle gare.
+        </div>
       </div>
-      <p class="section-head mb-2">// MATTINA</p>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#378ADD;"></span>
-        <span class="topic-text">Modelli atomici (Thomson, Rutherford, Bohr), isotopi, nucleo</span>
-      </div>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#378ADD;"></span>
-        <span class="topic-text">Atomo quantistico: orbitali, numeri quantici, configurazione elettronica</span>
-      </div>
-      <div class="flex gap-2 items-start mb-4">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#378ADD;"></span>
-        <span class="topic-text">Principio di Pauli, regola di Hund, livelli energetici</span>
-      </div>
-      <p class="section-head mb-2">// POMERIGGIO</p>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#1D9E75;"></span>
-        <span class="topic-text">Tavola periodica: gruppi, periodi, blocchi, simboli di Lewis</span>
-      </div>
-      <div class="flex gap-2 items-start mb-4">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#1D9E75;"></span>
-        <span class="topic-text">Proprietà periodiche: raggio atomico, energia ionizzazione, affinità elettronica, elettronegatività</span>
-      </div>
-      <div class="tip-box pl-3 py-1">
-        Esercitati a scrivere la configurazione elettronica degli elementi dei primi 4 periodi a memoria.
-      </div>
-    </div>
 
-    <!-- Day 2 — Legami -->
-    <div class="day-card p-5 rounded-none">
-      <div class="flex items-start gap-3 mb-4 flex-wrap">
-        <span class="badge" style="color:#c9862a;">DOM 22</span>
-        <span class="day-title">Legami chimici e forma delle molecole</span>
-        <span class="text-[10px] text-neutral-800 tracking-widest ml-auto">~4–5h</span>
+      <!-- Day 4 — Nomenclatura -->
+      <div class="day-card p-5 rounded-none">
+        <div class="flex items-start gap-3 mb-4 flex-wrap">
+          <span class="badge" style="color:#6fa832;">MAR 24</span>
+          <span class="day-title"
+            >Nomenclatura, soluzioni e prop. colligative</span
+          >
+          <span class="text-[10px] text-neutral-800 tracking-widest ml-auto"
+            >~4–5h</span
+          >
+        </div>
+        <p class="section-head mb-2">// MATTINA</p>
+        <div class="flex gap-2 items-start mb-4">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#639922;"></span>
+          <span class="topic-text"
+            >Numeri di ossidazione, ossidi, idruri, idracidi, idrossidi,
+            ossiacidi, sali — IUPAC e tradizionale</span
+          >
+        </div>
+        <p class="section-head mb-2">// POMERIGGIO</p>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#639922;"></span>
+          <span class="topic-text"
+            >Concentrazioni: molarità, molalità, %m/m, %m/V, ppm</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#639922;"></span>
+          <span class="topic-text"
+            >Proprietà colligative (abbassamento crioscopico, innalzamento
+            ebullioscopico, pressione osmotica)</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-4">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#639922;"></span>
+          <span class="topic-text">Solubilità e soluzioni elettrolitiche</span>
+        </div>
+        <div class="tip-box pl-3 py-1">
+          Per la nomenclatura: fai 20–30 composti da denominare e poi l'inverso
+          (nome → formula).
+        </div>
       </div>
-      <p class="section-head mb-2">// MATTINA</p>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#BA7517;"></span>
-        <span class="topic-text">Legame ionico, covalente (puro/polare), metallico — strutture di Lewis</span>
-      </div>
-      <div class="flex gap-2 items-start mb-4">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#BA7517;"></span>
-        <span class="topic-text">Solidi ionici, metallici, reticolari (diamante, grafite, quarzo)</span>
-      </div>
-      <p class="section-head mb-2">// POMERIGGIO</p>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#BA7517;"></span>
-        <span class="topic-text">Teoria VSEPR → geometria molecolare (lineare, piana, tetraedrica, ecc.)</span>
-      </div>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#BA7517;"></span>
-        <span class="topic-text">Momento dipolare, molecole polari/apolari</span>
-      </div>
-      <div class="flex gap-2 items-start mb-4">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#BA7517;"></span>
-        <span class="topic-text">Forze intermolecolari: London, dipolo-dipolo, legame a idrogeno</span>
-      </div>
-      <div class="tip-box pl-3 py-1">
-        Allena la VSEPR con H₂O, NH₃, CO₂, CH₄, SF₆, PCl₅ — spesso escono agli esami.
-      </div>
-    </div>
 
-    <!-- Day 3 — Moli -->
-    <div class="day-card p-5 rounded-none">
-      <div class="flex items-start gap-3 mb-4 flex-wrap">
-        <span class="badge" style="color:#c44a72;">LUN 23</span>
-        <span class="day-title">Moli, stechiometria e gas</span>
-        <span class="text-[10px] text-neutral-800 tracking-widest ml-auto">~4–5h</span>
+      <!-- Day 5 — Acidi -->
+      <div class="day-card p-5 rounded-none">
+        <div class="flex items-start gap-3 mb-4 flex-wrap">
+          <span class="badge" style="color:#d05a30;">MER 25</span>
+          <span class="day-title">Acidi, basi e reazioni chimiche</span>
+          <span class="text-[10px] text-neutral-800 tracking-widest ml-auto"
+            >~4–5h</span
+          >
+        </div>
+        <p class="section-head mb-2">// MATTINA</p>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#D85A30;"></span>
+          <span class="topic-text"
+            >Teorie acido-base: Arrhenius, Brønsted-Lowry, Lewis</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#D85A30;"></span>
+          <span class="topic-text"
+            >pH, Kw, acidi/basi forti e deboli, calcolo del pH</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-4">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#D85A30;"></span>
+          <span class="topic-text">Idrolisi, soluzioni tampone</span>
+        </div>
+        <p class="section-head mb-2">// POMERIGGIO</p>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#D85A30;"></span>
+          <span class="topic-text"
+            >Tipi di reazione: sintesi, scambio semplice/doppio, decomposizione</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-4">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#D85A30;"></span>
+          <span class="topic-text"
+            >Bilanciamento equazioni, calcolo del pH in esercizi misti</span
+          >
+        </div>
+        <div class="tip-box pl-3 py-1">
+          Concentrati sul calcolo del pH per acidi forti, basi forti, e
+          soluzioni tampone (Henderson-Hasselbalch).
+        </div>
       </div>
-      <p class="section-head mb-2">// MATTINA</p>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#D4537E;"></span>
-        <span class="topic-text">Mole, costante di Avogadro, massa molare, volume molare</span>
-      </div>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#D4537E;"></span>
-        <span class="topic-text">Formula minima e molecolare, composizione percentuale</span>
-      </div>
-      <div class="flex gap-2 items-start mb-4">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#D4537E;"></span>
-        <span class="topic-text">Calcoli stechiometrici, reagente limitante, resa di reazione</span>
-      </div>
-      <p class="section-head mb-2">// POMERIGGIO</p>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#D4537E;"></span>
-        <span class="topic-text">Leggi dei gas: Boyle, Charles, Gay-Lussac, principio Avogadro</span>
-      </div>
-      <div class="flex gap-2 items-start mb-4">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#D4537E;"></span>
-        <span class="topic-text">Equazione di stato dei gas ideali PV = nRT</span>
-      </div>
-      <div class="tip-box pl-3 py-1">
-        Risolvi almeno 10 esercizi numerici sulla stechiometria — è la sezione con più calcoli alle gare.
-      </div>
-    </div>
 
-    <!-- Day 4 — Nomenclatura -->
-    <div class="day-card p-5 rounded-none">
-      <div class="flex items-start gap-3 mb-4 flex-wrap">
-        <span class="badge" style="color:#6fa832;">MAR 24</span>
-        <span class="day-title">Nomenclatura, soluzioni e prop. colligative</span>
-        <span class="text-[10px] text-neutral-800 tracking-widest ml-auto">~4–5h</span>
+      <!-- Day 6 — Termochimica -->
+      <div class="day-card p-5 rounded-none">
+        <div class="flex items-start gap-3 mb-4 flex-wrap">
+          <span class="badge" style="color:#6d65d4;">GIO 26</span>
+          <span class="day-title"
+            >Termochimica, teoria cinetica e laboratorio</span
+          >
+          <span class="text-[10px] text-neutral-800 tracking-widest ml-auto"
+            >~4h</span
+          >
+        </div>
+        <p class="section-head mb-2">// MATTINA</p>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#534AB7;"></span>
+          <span class="topic-text"
+            >Termochimica: entalpia, reazioni eso/endotermiche, legge di Hess</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-4">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#534AB7;"></span>
+          <span class="topic-text"
+            >Teoria cinetico-molecolare, passaggi di stato, energia cinetica
+            media</span
+          >
+        </div>
+        <p class="section-head mb-2">// POMERIGGIO</p>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#534AB7;"></span>
+          <span class="topic-text"
+            >Laboratorio: DPI, pittogrammi, frasi H e P, schede di sicurezza</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#534AB7;"></span>
+          <span class="topic-text"
+            >Tecniche di separazione (filtrazione, distillazione, cromatografia,
+            estrazione)</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-4">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#534AB7;"></span>
+          <span class="topic-text"
+            >Misure di massa, volume e temperatura; cifre significative</span
+          >
+        </div>
+        <div class="tip-box pl-3 py-1">
+          Il laboratorio è spesso sottovalutato — i pittogrammi GHS e le frasi H
+          escono spesso nelle gare.
+        </div>
       </div>
-      <p class="section-head mb-2">// MATTINA</p>
-      <div class="flex gap-2 items-start mb-4">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#639922;"></span>
-        <span class="topic-text">Numeri di ossidazione, ossidi, idruri, idracidi, idrossidi, ossiacidi, sali — IUPAC e tradizionale</span>
-      </div>
-      <p class="section-head mb-2">// POMERIGGIO</p>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#639922;"></span>
-        <span class="topic-text">Concentrazioni: molarità, molalità, %m/m, %m/V, ppm</span>
-      </div>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#639922;"></span>
-        <span class="topic-text">Proprietà colligative (abbassamento crioscopico, innalzamento ebullioscopico, pressione osmotica)</span>
-      </div>
-      <div class="flex gap-2 items-start mb-4">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#639922;"></span>
-        <span class="topic-text">Solubilità e soluzioni elettrolitiche</span>
-      </div>
-      <div class="tip-box pl-3 py-1">
-        Per la nomenclatura: fai 20–30 composti da denominare e poi l'inverso (nome → formula).
-      </div>
-    </div>
 
-    <!-- Day 5 — Acidi -->
-    <div class="day-card p-5 rounded-none">
-      <div class="flex items-start gap-3 mb-4 flex-wrap">
-        <span class="badge" style="color:#d05a30;">MER 25</span>
-        <span class="day-title">Acidi, basi e reazioni chimiche</span>
-        <span class="text-[10px] text-neutral-800 tracking-widest ml-auto">~4–5h</span>
+      <!-- Day 7 — Revisione -->
+      <div class="day-card p-5 rounded-none">
+        <div class="flex items-start gap-3 mb-4 flex-wrap">
+          <span class="badge" style="color:#555550;">VEN 27</span>
+          <span class="day-title">Revisione totale + esercizi da gara</span>
+          <span class="text-[10px] text-neutral-800 tracking-widest ml-auto"
+            >~5–6h</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#444440;"></span>
+          <span class="topic-text"
+            >Ripassi rapidi degli argomenti più deboli</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-2">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#444440;"></span>
+          <span class="topic-text"
+            >Simula una gara con le prove degli anni precedenti (Giochi della
+            Chimica)</span
+          >
+        </div>
+        <div class="flex gap-2 items-start mb-4">
+          <span
+            class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0"
+            style="background:#444440;"></span>
+          <span class="topic-text">Revisione errori e gap</span>
+        </div>
+        <div class="tip-box pl-3 py-1">
+          SAB 28 = solo ripasso leggero. Non studiare cose nuove il giorno
+          prima.
+        </div>
       </div>
-      <p class="section-head mb-2">// MATTINA</p>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#D85A30;"></span>
-        <span class="topic-text">Teorie acido-base: Arrhenius, Brønsted-Lowry, Lewis</span>
-      </div>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#D85A30;"></span>
-        <span class="topic-text">pH, Kw, acidi/basi forti e deboli, calcolo del pH</span>
-      </div>
-      <div class="flex gap-2 items-start mb-4">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#D85A30;"></span>
-        <span class="topic-text">Idrolisi, soluzioni tampone</span>
-      </div>
-      <p class="section-head mb-2">// POMERIGGIO</p>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#D85A30;"></span>
-        <span class="topic-text">Tipi di reazione: sintesi, scambio semplice/doppio, decomposizione</span>
-      </div>
-      <div class="flex gap-2 items-start mb-4">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#D85A30;"></span>
-        <span class="topic-text">Bilanciamento equazioni, calcolo del pH in esercizi misti</span>
-      </div>
-      <div class="tip-box pl-3 py-1">
-        Concentrati sul calcolo del pH per acidi forti, basi forti, e soluzioni tampone (Henderson-Hasselbalch).
-      </div>
-    </div>
+    </main>
 
-    <!-- Day 6 — Termochimica -->
-    <div class="day-card p-5 rounded-none">
-      <div class="flex items-start gap-3 mb-4 flex-wrap">
-        <span class="badge" style="color:#6d65d4;">GIO 26</span>
-        <span class="day-title">Termochimica, teoria cinetica e laboratorio</span>
-        <span class="text-[10px] text-neutral-800 tracking-widest ml-auto">~4h</span>
-      </div>
-      <p class="section-head mb-2">// MATTINA</p>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#534AB7;"></span>
-        <span class="topic-text">Termochimica: entalpia, reazioni eso/endotermiche, legge di Hess</span>
-      </div>
-      <div class="flex gap-2 items-start mb-4">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#534AB7;"></span>
-        <span class="topic-text">Teoria cinetico-molecolare, passaggi di stato, energia cinetica media</span>
-      </div>
-      <p class="section-head mb-2">// POMERIGGIO</p>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#534AB7;"></span>
-        <span class="topic-text">Laboratorio: DPI, pittogrammi, frasi H e P, schede di sicurezza</span>
-      </div>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#534AB7;"></span>
-        <span class="topic-text">Tecniche di separazione (filtrazione, distillazione, cromatografia, estrazione)</span>
-      </div>
-      <div class="flex gap-2 items-start mb-4">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#534AB7;"></span>
-        <span class="topic-text">Misure di massa, volume e temperatura; cifre significative</span>
-      </div>
-      <div class="tip-box pl-3 py-1">
-        Il laboratorio è spesso sottovalutato — i pittogrammi GHS e le frasi H escono spesso nelle gare.
-      </div>
-    </div>
-
-    <!-- Day 7 — Revisione -->
-    <div class="day-card p-5 rounded-none">
-      <div class="flex items-start gap-3 mb-4 flex-wrap">
-        <span class="badge" style="color:#555550;">VEN 27</span>
-        <span class="day-title">Revisione totale + esercizi da gara</span>
-        <span class="text-[10px] text-neutral-800 tracking-widest ml-auto">~5–6h</span>
-      </div>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#444440;"></span>
-        <span class="topic-text">Ripassi rapidi degli argomenti più deboli</span>
-      </div>
-      <div class="flex gap-2 items-start mb-2">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#444440;"></span>
-        <span class="topic-text">Simula una gara con le prove degli anni precedenti (Giochi della Chimica)</span>
-      </div>
-      <div class="flex gap-2 items-start mb-4">
-        <span class="w-[6px] h-[6px] rounded-full mt-[5px] shrink-0" style="background:#444440;"></span>
-        <span class="topic-text">Revisione errori e gap</span>
-      </div>
-      <div class="tip-box pl-3 py-1">
-        SAB 28 = solo ripasso leggero. Non studiare cose nuove il giorno prima.
-      </div>
-    </div>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="max-w-3xl mx-auto mt-14 pt-6 border-t border-neutral-900">
-    <p class="text-[10px] text-neutral-800 tracking-[0.2em] text-center">[ FINE PIANO · BUONA FORTUNA ]</p>
-  </footer>
-
-</body>
+    <!-- Footer -->
+    <footer class="max-w-3xl mx-auto mt-14 pt-6 border-t border-neutral-900">
+      <p class="text-[10px] text-neutral-800 tracking-[0.2em] text-center">
+        [ FINE PIANO · BUONA FORTUNA ]
+      </p>
+    </footer>
+  </body>
 </html>
